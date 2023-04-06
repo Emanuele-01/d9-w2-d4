@@ -7,8 +7,8 @@ const MainSearch = () => {
   // const [jobs, setJobs] = useState([])
 
   const dispatch = useDispatch;
-  const query = useSelector(state => state.query)
-  const jobs = useSelector(state => state.jobs)
+  const query = useSelector(state => state.query.content)
+  const jobs = useSelector(state => state.jobs.content)
 
   const baseEndpoint = 'https://strive-benchmark.herokuapp.com/api/jobs?search='
 
@@ -22,7 +22,7 @@ const MainSearch = () => {
     try {
       const response = await fetch(baseEndpoint + query + '&limit=20')
       if (response.ok) {
-        const { data } = await response.json()
+        const data  = await response.json()
         dispatch({type: 'setJobs', payload : data})
       } else {
         alert('Error fetching results')
